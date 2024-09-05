@@ -1,6 +1,3 @@
-Certainly! Here is the content for your README file formatted in Markdown (.md) for GitHub:
-
-```markdown
 # Number to Words Converter
 
 A Flutter application that converts numbers into words in English and Gujarati. This app demonstrates the conversion of numbers ranging from 1 to 100 into their respective word forms.
@@ -41,20 +38,6 @@ A Flutter application that converts numbers into words in English and Gujarati. 
    flutter run
    ```
 
-## Configuration
-
-### Setting Up Icons
-
-1. Replace the existing icon image in `assets/images/logo.png` with your desired icon image.
-2. Ensure the image has a white background if needed.
-3. Regenerate the icons using:
-
-   ```bash
-   flutter pub get
-   flutter pub run flutter_launcher_icons:main
-   ```
-
-
 
 
 ## Contributing
@@ -68,6 +51,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Contact
 
 For any inquiries or issues, please contact [RUTVIK B NAKUM](mailto:nakumrutvik9565@gmail.com).
-```
-
-Replace `yourusername` with your actual GitHub username and `youremail@example.com` with your contact email. Adjust the screenshots section to include actual images if you have them, and modify any other sections as necessary.
