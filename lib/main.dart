@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'number_to_english.dart';
 import 'number_to_gujarati.dart';
+import 'number_to_hindi.dart'; // Import the Hindi conversion logic
 
 void main() {
   runApp(NumberToWordsApp());
@@ -15,14 +16,13 @@ class NumberToWordsApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Numbers to Words Converter',
       theme: ThemeData(
-        // Define the default brightness and colors.
         primarySwatch: Colors.purple,
         appBarTheme: AppBarTheme(
-          backgroundColor: Colors.white, // Background color of the AppBar
+          backgroundColor: Colors.white,
           titleTextStyle: TextStyle(
-            color: Colors.purple, // Color of the title text
-            fontSize: 18, // Font size of the title text
-            fontWeight: FontWeight.bold, // Font weight of the title text
+            color: Colors.purple,
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
           ),
         ),
       ),
@@ -65,10 +65,11 @@ class _SplashScreenState extends State<SplashScreen> {
             Text(
               'Numbers to Words Converter',
               style: TextStyle(
-                  fontSize: MediaQuery.of(context).size.width *
-                      0.06, // Adjust text size
-                  fontWeight: FontWeight.bold,
-                  color: Colors.purple),
+                fontSize: MediaQuery.of(context).size.width *
+                    0.06, // Adjust text size
+                fontWeight: FontWeight.bold,
+                color: Colors.purple,
+              ),
             ),
             SizedBox(height: 20),
             CircularProgressIndicator(),
@@ -95,7 +96,11 @@ class _NumberToWordsScreenState extends State<NumberToWordsScreen> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text(
-            _selectedLanguage == 'English' ? 'Error' : 'ભૂલ',
+            _selectedLanguage == 'English'
+                ? 'Error'
+                : _selectedLanguage == 'Gujarati'
+                    ? 'ભૂલ'
+                    : 'त्रुटि',
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
           content: Text(message),
@@ -105,7 +110,11 @@ class _NumberToWordsScreenState extends State<NumberToWordsScreen> {
                 Navigator.of(context).pop();
               },
               child: Text(
-                _selectedLanguage == 'English' ? 'OK' : 'ઠીક છે',
+                _selectedLanguage == 'English'
+                    ? 'OK'
+                    : _selectedLanguage == 'Gujarati'
+                        ? 'ઠીક છે'
+                        : 'ठीक है',
               ),
             ),
           ],
@@ -122,11 +131,15 @@ class _NumberToWordsScreenState extends State<NumberToWordsScreen> {
           _output = numberToEnglishWords(number);
         } else if (_selectedLanguage == 'Gujarati') {
           _output = numberToGujaratiWords(number);
+        } else if (_selectedLanguage == 'Hindi') {
+          _output = numberToHindiWords(number);
         }
       } else {
         String errorMessage = _selectedLanguage == 'English'
             ? 'Please enter a valid number'
-            : 'કૃપા કરીને યોગ્ય નંબર દાખલ કરો';
+            : _selectedLanguage == 'Gujarati'
+                ? 'કૃપા કરીને યોગ્ય નંબર દાખલ કરો'
+                : 'कृपया एक मान्य संख्या दर्ज करें';
         _showErrorDialog(errorMessage);
         _output = '';
       }
@@ -140,7 +153,9 @@ class _NumberToWordsScreenState extends State<NumberToWordsScreen> {
         title: Text(
           _selectedLanguage == 'English'
               ? 'Number to Words Converter'
-              : 'નંબર થી શબ્દ માં રૂપાંતરક',
+              : _selectedLanguage == 'Gujarati'
+                  ? 'નંબર થી શબ્દ માં રૂપાંતરક'
+                  : 'संख्या से शब्द कन्वर्टर',
         ),
         actions: [
           PopupMenuButton<String>(
@@ -150,7 +165,7 @@ class _NumberToWordsScreenState extends State<NumberToWordsScreen> {
               });
             },
             itemBuilder: (BuildContext context) {
-              return ['English', 'Gujarati'].map((String language) {
+              return ['English', 'Gujarati', 'Hindi'].map((String language) {
                 return PopupMenuItem<String>(
                   value: language,
                   child: Text(language),
@@ -176,22 +191,30 @@ class _NumberToWordsScreenState extends State<NumberToWordsScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             TextField(
-                style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.purple,
-                    fontWeight: FontWeight.bold),
-                controller: _controller,
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                  labelText: _selectedLanguage == 'English'
-                      ? 'Enter a number'
-                      : 'નંબર દાખલ કરો',
-                )),
+              style: TextStyle(
+                fontSize: 20,
+                color: Colors.purple,
+                fontWeight: FontWeight.bold,
+              ),
+              controller: _controller,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                labelText: _selectedLanguage == 'English'
+                    ? 'Enter a number'
+                    : _selectedLanguage == 'Gujarati'
+                        ? 'નંબર દાખલ કરો'
+                        : 'संख्या दर्ज करें',
+              ),
+            ),
             SizedBox(height: 30),
             ElevatedButton(
               onPressed: _convertToWords,
               child: Text(
-                _selectedLanguage == 'English' ? 'Convert' : 'રૂપાંતરિત કરો',
+                _selectedLanguage == 'English'
+                    ? 'Convert'
+                    : _selectedLanguage == 'Gujarati'
+                        ? 'રૂપાંતરિત કરો'
+                        : 'कन्वर्ट करें',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ),
@@ -199,9 +222,10 @@ class _NumberToWordsScreenState extends State<NumberToWordsScreen> {
             Text(
               _output,
               style: TextStyle(
-                  fontSize: 35,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.purple),
+                fontSize: 35,
+                fontWeight: FontWeight.bold,
+                color: Colors.purple,
+              ),
             ),
           ],
         ),
