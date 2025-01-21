@@ -1,5 +1,3 @@
-// lib/number_to_english.dart
-
 Map<int, String> englishUnitsMap = {
   0: 'zero',
   1: 'one',

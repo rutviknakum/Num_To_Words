@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.example.num_to_words_converter"
-    compileSdk = flutter.compileSdkVersion
+    compileSdk = 35
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
