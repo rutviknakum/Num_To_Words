@@ -98,6 +98,7 @@ class _NumberToWordsScreenState extends State<NumberToWordsScreen> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData.light(useMaterial3: true),
       darkTheme: ThemeData.dark(useMaterial3: true),
       themeMode: ThemeMode.system,
@@ -138,52 +139,54 @@ class _NumberToWordsScreenState extends State<NumberToWordsScreen> {
             ),
           ],
         ),
-        body: Padding(
-          padding: EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              TextField(
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.purple,
-                  fontWeight: FontWeight.bold,
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                TextField(
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.purple,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  controller: _controller,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    labelText: _selectedLanguage == 'English'
+                        ? 'Enter a number'
+                        : _selectedLanguage == 'Gujarati'
+                            ? 'નંબર દાખલ કરો'
+                            : 'संख्या दर्ज करें',
+                  ),
+                  onChanged: (value) {
+                    _convertToWords(); // Real-time conversion
+                  },
                 ),
-                controller: _controller,
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                  labelText: _selectedLanguage == 'English'
-                      ? 'Enter a number'
-                      : _selectedLanguage == 'Gujarati'
-                          ? 'નંબર દાખલ કરો'
-                          : 'संख्या दर्ज करें',
+                SizedBox(height: 30),
+                // ElevatedButton(
+                //   onPressed: _convertToWords,
+                //   child: Text(
+                //     _selectedLanguage == 'English'
+                //         ? 'Convert'
+                //         : _selectedLanguage == 'Gujarati'
+                //             ? 'રૂપાંતરિત કરો'
+                //             : 'कन्वर्ट करें',
+                //     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                //   ),
+                // ),
+                SizedBox(height: 20),
+                Text(
+                  _output,
+                  style: TextStyle(
+                    fontSize: 35,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.purple,
+                  ),
                 ),
-                onChanged: (value) {
-                  _convertToWords(); // Real-time conversion
-                },
-              ),
-              SizedBox(height: 30),
-              ElevatedButton(
-                onPressed: _convertToWords,
-                child: Text(
-                  _selectedLanguage == 'English'
-                      ? 'Convert'
-                      : _selectedLanguage == 'Gujarati'
-                          ? 'રૂપાંતરિત કરો'
-                          : 'कन्वर्ट करें',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-              ),
-              SizedBox(height: 20),
-              Text(
-                _output,
-                style: TextStyle(
-                  fontSize: 35,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.purple,
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
         floatingActionButton: FloatingActionButton(
