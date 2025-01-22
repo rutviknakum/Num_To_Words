@@ -1,5 +1,3 @@
-// lib/number_to_gujarati.dart
-
 Map<int, String> gujaratiUnitsMap = {
   0: 'શૂન્ય',
   1: 'એક',

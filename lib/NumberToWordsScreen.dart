@@ -86,7 +86,7 @@ class _NumberToWordsScreenState extends State<NumberToWordsScreen> {
         setState(() {
           _spokenText = result.recognizedWords;
           _controller.text = _spokenText;
-          _convertToWords(); // Trigger real-time conversion
+          _convertToWords();
         });
       });
     } else {
@@ -161,7 +161,7 @@ class _NumberToWordsScreenState extends State<NumberToWordsScreen> {
                             : 'संख्या दर्ज करें',
                   ),
                   onChanged: (value) {
-                    _convertToWords(); // Real-time conversion
+                    _convertToWords();
                   },
                 ),
                 SizedBox(height: 30),

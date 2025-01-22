@@ -42,7 +42,6 @@ String numberToEnglishWords(int number) {
   String result = '';
 
   if (number >= 1000000000) {
-    // Billions
     result += numberToEnglishWords(number ~/ 1000000000) +
         ' ' +
         englishPlaceValueMap[1000000000]! +
@@ -51,7 +50,6 @@ String numberToEnglishWords(int number) {
   }
 
   if (number >= 1000000) {
-    // Millions
     result += numberToEnglishWords(number ~/ 1000000) +
         ' ' +
         englishPlaceValueMap[1000000]! +
@@ -60,7 +58,6 @@ String numberToEnglishWords(int number) {
   }
 
   if (number >= 1000) {
-    // Thousands
     result += numberToEnglishWords(number ~/ 1000) +
         ' ' +
         englishPlaceValueMap[1000]! +
@@ -69,7 +66,6 @@ String numberToEnglishWords(int number) {
   }
 
   if (number >= 100) {
-    // Hundreds
     result += numberToEnglishWords(number ~/ 100) +
         ' ' +
         englishPlaceValueMap[100]! +

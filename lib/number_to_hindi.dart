@@ -1,5 +1,3 @@
-// lib/number_to_hindi.dart
-
 Map<int, String> hindiUnitsMap = {
   0: 'शून्य',
   1: 'एक',
