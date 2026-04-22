@@ -1,37 +1,16 @@
-buildscript {
-    repositories {
-        google()  // Google's Maven repository for Android tools
-        mavenCentral()  // Central Maven repository
-    }
-    dependencies {
-        // Ensure this is the correct version of Gradle Plugin compatible with Java 17
-        classpath 'com.android.tools.build:gradle:8.0.1'  // Android Gradle Plugin version
-
-        // Add other classpath dependencies here as needed
-    }
-}
-
 allprojects {
     repositories {
-        google()  // Google's Maven repository
-        mavenCentral()  // Central Maven repository
+        google()
+        mavenCentral()
     }
 }
 
-// Define the build directory for the root project
 rootProject.buildDir = "../build"
 
-// Configure subprojects (e.g., app module) to use the same build directory
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
 }
 
-// Ensure app module is evaluated before other subprojects
-subprojects {
-    project.evaluationDependsOn(":app")
-}
-
-// Register a task for cleaning the build directory
 tasks.register("clean", Delete) {
     delete rootProject.buildDir
 }
